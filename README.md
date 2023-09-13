@@ -21,6 +21,7 @@ Langkah 6: Melakukan git add commpit push di repositori travelio. Lalu, melakuka
 [![Add-a-little-bit-of-body-text.png](https://i.postimg.cc/YqH85Q6T/Add-a-little-bit-of-body-text.png)](https://postimg.cc/jCMzNwkh)
 
 <h1>Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?</h1>
+
 Virtualk environment adalah lingkungan isolasi dalam pengembangan softwase (web Django) yang tujuannya untuk:
 - Isolasi dependensi: Venv memungkinkan mengelola dependensi proyek secara terpisah. Hal ini penting ketika kita bekerja pada proyek yang rawan terjadi konflik. 
 - Keamanan: Venc dapat menghindari perubahan atau penyusupan berkas diluar kendali.
@@ -29,6 +30,7 @@ Virtualk environment adalah lingkungan isolasi dalam pengembangan softwase (web 
 Kita juga bisa membuat website berbasis Django tanpa venv, namun tidak dianjurkan karena tidak memiliki kelebihan-kelebihan di atas dan membuat pengerjaan menjadi lebih rumit. Maka dari itu, kita dianjurkan menggunakan venv dalam proyek pengembangan Django.
 
 <h1>Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya.</h1>
+
 MVC (Model View Controller), MVT (Model View Template), MVVM (Model View ViewModel) merupakan design arsitektur dalam pengembangan software. Berikut ini adalah penjelasan mengenai masing-masing pola dan perbedaannya:
 1. Model View Controller (MVC)
 - Model: Mengelola data aplikasi dan menjalankan logika bisnis.
