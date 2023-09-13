@@ -18,6 +18,8 @@ Langkah 6: Melakukan git add commpit push di repositori travelio. Lalu, melakuka
 
 <h1>Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.</h1>
 
+<h2>Bagan di bawah berisi request client ke web aplikasi berbasis Django. Panah yang mulai dari client menunjukan request client. Panah yang menuju client menunjukkan response.</h2>
+
 [![Add-a-little-bit-of-body-text.png](https://i.postimg.cc/YqH85Q6T/Add-a-little-bit-of-body-text.png)](https://postimg.cc/jCMzNwkh)
 
 <h1>Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?</h1>
