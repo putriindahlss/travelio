@@ -1,4 +1,9 @@
-1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+<h1>Link Adaptable</h1>
+
+https://travelio.adaptable.app/
+
+<h1>Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)</h1>
+
 Langkah 1: Membuat direktori dengan nama travelio di git dan menambahkan dependencies. Setelah itu saya membuat proyek Django dengan nama travelio dengan perintah django-admin startproject travelio .
 
 Langkah 2: Membuat aplikasi main di proyek Django. Setelah menjalankan perintah di langkah 1, terbentuk direktori main. Lalu, jalankan python manage.py startapp main dan tambahkan 'main' ke list INSTALLED_APPS di settings.py (berdasarkan tutorial).
@@ -11,19 +16,22 @@ Langkah 5: Mengimpor fungsi render dan menambahkan fungsi untuk dikembalikan ke 
 
 Langkah 6: Melakukan git add commpit push di repositori travelio. Lalu, melakukan deployment aplikasi pada adaptable.
 
-2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
+<h1>Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.</h1>
+
+<h2>Bagan di bawah berisi request client ke web aplikasi berbasis Django. Panah yang mulai dari client menunjukan request client. Panah yang menuju client menunjukkan response.</h2>
+
 [![Add-a-little-bit-of-body-text.png](https://i.postimg.cc/YqH85Q6T/Add-a-little-bit-of-body-text.png)](https://postimg.cc/jCMzNwkh)
 
-3. Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
-Virtualk environment adalah lingkungan isolasi dalam pengembangan softwase (web Django) yang tujuannya untuk:
+<h1>Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?</h1>
+
+Virtual environment adalah lingkungan isolasi dalam pengembangan softwase (web Django) yang tujuannya untuk:
 - Isolasi dependensi: Venv memungkinkan mengelola dependensi proyek secara terpisah. Hal ini penting ketika kita bekerja pada proyek yang rawan terjadi konflik. 
 - Keamanan: Venc dapat menghindari perubahan atau penyusupan berkas diluar kendali.
 - Kontrol versi: Kita dapat membuat daftar dependensi proyek dan mengontrol versi yang digunakan untuk mereproduksi lingkungan pengembangan, uji, dan produksi.
 
 Kita juga bisa membuat website berbasis Django tanpa venv, namun tidak dianjurkan karena tidak memiliki kelebihan-kelebihan di atas dan membuat pengerjaan menjadi lebih rumit. Maka dari itu, kita dianjurkan menggunakan venv dalam proyek pengembangan Django.
 
-
-4. Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya.
+<h1>Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya.</h1>
 MVC (Model View Controller), MVT (Model View Template), MVVM (Model View ViewModel) merupakan design arsitektur dalam pengembangan software. Berikut ini adalah penjelasan mengenai masing-masing pola dan perbedaannya:
 1. Model View Controller (MVC)
 - Model: Mengelola data aplikasi dan menjalankan logika bisnis.
@@ -43,13 +51,15 @@ MVC (Model View Controller), MVT (Model View Template), MVVM (Model View ViewMod
 Perbedaan ketiganya adalah cara mengatur interaksi antara model, view, dan pengontrol. Di mana MVC merupakan pola yang sudah digunakan dalam berbagai kerangka kerja web, MVT adalah variasi Django dengan template untuk tampilan, sedangkan MVVM digunakan dalam pengembangan aplikasi desktop dan aplikasi berbasis interface yang kompleks.
 
 Tugas 3
-1. Apa perbedaan antara form POST dan form GET dalam Django?
+<h1>Apa perbedaan antara form POST dan form GET dalam Django?</h1>
+
 - Form POST: Mengirim data melalui permintaan HTTP POST dengan mengirimkan formulir pendaftaran atau mengirim data yang akan disimpan ke server kemudian menerima kembali responsnya. Data yang dikirim melalui POST cenderung lebih aman karena tidak terlihat dalam URL (cocok untuk data sensitif, seperti password). 
 POST tidak memiliki batasan ukuran data yang ketat, sehingga lebih cocok untuk mengirim data yang besar. 
 - Form GET: Mengirim data melalui URL, yang terlihat dalam tautan dan biasanya digunakan untuk mengirim data yang tidak sensitif. 
 GET memiliki batasan ukuran data yang lebih kecil, tergantung pada server dan browser. GET lebih tidak aman karena data dapat terlihat oleh siapa saja yang melihat URL dan dapat dibagikan sebagai tautan.
 
-2. Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
+<h1>Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?</h1>
+
 Dalam konteks pengiriman data, berikut adalah perbedaan utama dari XML, JSON, dan HTML:
 - XML (eXtensible Markup Language): XML adalah format teks yang digunakan untuk menyusun dan mengirim data dalam struktur hierarkis/pohon. Biasanya digunakan untuk menyimpan dan berbagi data antar aplikasi, seperti web service dan pembuatan dokumen. XML bisa digunakan dalam C++, Java, atau Python. Kesimpulannya, XML fokus pada struktur data.
 
@@ -57,7 +67,8 @@ Dalam konteks pengiriman data, berikut adalah perbedaan utama dari XML, JSON, da
 
 - HTML (HyperText Markup Language): HTML adalah bahasa markup untuk membuat aplikasi dan halaman web. HTML digunakan untuk menampilkan data, mengubah teks menjadi gambar, dan bagaimana dokumen diakses di browser. Tetapi, HTML tidak dirancang untuk pertukaran data melalui jaringan seperti XML atau JSON. Kesimpulannya, HTML fokus bagaimana penyajian data.
 
-3. Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
+<h1>Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?</h1>
+
 JSON sering digunakan dalam pertukaran daya antara aplikasi dan web modern karena sifatnya yang:
 
 - Ringan: JSON adalah format teks yang ringan, mudah dibaca, mudah dikirim, dan efisien untuk aplikasi web.
@@ -70,7 +81,8 @@ JSON sering digunakan dalam pertukaran daya antara aplikasi dan web modern karen
 
 - Fleksibilitas dalam Representasi Data: JSON memungkinkan representasi fleksibel dari berbagai jenis data, seperti tipe data string dan integer, serta struktur yang lebih kompleks seperti objek dan array.
 
-4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+<h1> Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).</h1>
+
 a. Buat Input Form untuk Menambahkan Objek pada App Sebelumnya
 - Langkah pertama membuat berkas baru di direktori main (forms.py) yang berisi:
 from django.forms import ModelForm
