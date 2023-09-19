@@ -2,6 +2,7 @@
 
 https://travelio.adaptable.app/
 
+<h1>Tugas 2</h1>
 <h1>Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)</h1>
 
 Langkah 1: Membuat direktori dengan nama travelio di git dan menambahkan dependencies. Setelah itu saya membuat proyek Django dengan nama travelio dengan perintah django-admin startproject travelio .
@@ -50,7 +51,7 @@ MVC (Model View Controller), MVT (Model View Template), MVVM (Model View ViewMod
 
 Perbedaan ketiganya adalah cara mengatur interaksi antara model, view, dan pengontrol. Di mana MVC merupakan pola yang sudah digunakan dalam berbagai kerangka kerja web, MVT adalah variasi Django dengan template untuk tampilan, sedangkan MVVM digunakan dalam pengembangan aplikasi desktop dan aplikasi berbasis interface yang kompleks.
 
-Tugas 3
+<h1>Tugas 3</h1>
 <h1>Apa perbedaan antara form POST dan form GET dalam Django?</h1>
 
 - Form POST: Mengirim data melalui permintaan HTTP POST dengan mengirimkan formulir pendaftaran atau mengirim data yang akan disimpan ke server kemudian menerima kembali responsnya. Data yang dikirim melalui POST cenderung lebih aman karena tidak terlihat dalam URL (cocok untuk data sensitif, seperti password). 
@@ -79,12 +80,13 @@ JSON sering digunakan dalam pertukaran daya antara aplikasi dan web modern karen
 
 - Struktur Data Sederhana: JSON memiliki struktur data yang sederhana dan mudah dipahami, tidak seperti format lainnya.
 
-- Fleksibilitas dalam Representasi Data: JSON memungkinkan representasi fleksibel dari berbagai jenis data, seperti tipe data string dan integer, serta struktur yang lebih kompleks seperti objek dan array.
+- Fleksibilitas dalam Representasi Data: JSON memungkinkan representasi fleksibel dari berbagai jenis data seperti tipe data string dan integer, serta struktur yang lebih kompleks seperti objek dan array.
 
 <h1> Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).</h1>
 
 a. Buat Input Form untuk Menambahkan Objek pada App Sebelumnya
 - Langkah pertama membuat berkas baru di direktori main (forms.py) yang berisi:
+```python
 from django.forms import ModelForm
 from main.models import Product
 
@@ -92,8 +94,9 @@ class ProductForm(ModelForm):
     class Meta:
         model = Product
         fields = ["name", "amount", "description"]
-
-- Modifikasi (views.py) dengan mengimport modul dan fungsi create_product.
+```
+- Modifikasi (views.py) dengan mengimport modul dan fungsi create_product
+```python
 def create_product(request):
     form = ProductForm(request.POST or None)
 
@@ -103,11 +106,14 @@ def create_product(request):
 
     context = {'form': form}
     return render(request, "create_product.html", context)
-
+```
 - Mengubah fungsi show_main
 - Menambahkan path di bawah ke urlpattern
+```python
 path('create-product', create_product, name='create_product'),
+```
 - Membuat berkas HTML (create_product.html) di direktori main/templates yang berisi:
+```html
 {% extends 'base.html' %} 
 
 {% block content %}
@@ -127,18 +133,21 @@ path('create-product', create_product, name='create_product'),
 </form>
 
 {% endblock %}
-
+```
 b. Menambahkan 5 Fungsi Views (melihat objek yang sudah ditambahkan).
 - Dengan format HTML, XML, JSON, XML by ID, dan JSON by ID.
-- Import 
+- Import
+```python
 from django.http import HttpResponseRedirect
 from main.forms import ProductForm
 from django.urls import reverse
 from main.models import Product
 from django.http import HttpResponse
 from django.core import serializers
+```
 - Buat fungsi create_product untuk menampilkan data produk di HTML.
 - Megubah fungsi show_main pada berkas views.py
+```python
 def show_main(request):
     products = Product.objects.all()
 
@@ -149,7 +158,9 @@ def show_main(request):
     }
 
     return render(request, "main.html", context)
+```
 - Menambah fungsi show_xml dan show_json untuk mengembalikan data dalam bentuk XML dan JSON
+```python
 def show_xml(request):
     data = Product.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
@@ -157,7 +168,9 @@ def show_xml(request):
 def show_json(request):
     data = Product.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+```
 - Menambah fungsi show_xml_by_id dan show_json_by_id
+```python
 def show_xml_by_id(request, id):
     data = Product.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
@@ -165,20 +178,31 @@ def show_xml_by_id(request, id):
 def show_json_by_id(request, id):
     data = Product.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
-
+```
 c. Membuat Routing URL Tiap Views 
-- Import fungsi ke urls.py di folder main yang sudah dibuat di atas 
+- Import fungsi ke urls.py di folder main yang sudah dibuat di atas
+```python
 from main.views import show_main, create_product, show_xml, show_json, show_xml_by_id, show_json_by_id
+```
 - Tambahkan path ke urlpatterns untuk akses fungsi yang sudah diimpor.
 
 d. Mengakses URL dengan Postman
-- Send request dengan method get di Postman pakai"
+- Send request dengan method get di Postman pakai:
 - http://localhost:8000
+  [![Screenshot-2023-09-18-141442.png](https://i.postimg.cc/rmt7HcC7/Screenshot-2023-09-18-141442.png)](https://postimg.cc/mzBdcvnS)
 - http://localhost:8000/xml
+  [![Screenshot-2023-09-18-141548.png](https://i.postimg.cc/1tpJ6zKR/Screenshot-2023-09-18-141548.png)](https://postimg.cc/WF1GcTKx)
 - http://localhost:8000/xml/1
-- http://localhost:8000/json 
+  [![Screenshot-2023-09-18-141717.png](https://i.postimg.cc/LXdxnPL0/Screenshot-2023-09-18-141717.png)](https://postimg.cc/CZNG2zvj)
+- http://localhost:8000/json
+  [![Screenshot-2023-09-18-141744.png](https://i.postimg.cc/WbsfG0KB/Screenshot-2023-09-18-141744.png)](https://postimg.cc/Wtfnjqs8)
 - http://localhost:8000/json/1
+  [![Screenshot-2023-09-18-141803.png](https://i.postimg.cc/jS5g9tRv/Screenshot-2023-09-18-141803.png)](https://postimg.cc/3dsF0M4D)
 
 e. BONUS
 - Menambahkan kode di bawah pada main.html
+  [![Screenshot-2023-09-19-141818.png](https://i.postimg.cc/kXPKBtwL/Screenshot-2023-09-19-141818.png)](https://postimg.cc/SjVJPRBG)
+  
+```html
 <h2>{{ products.count }} saved item(s) in this app</h2>
+```
