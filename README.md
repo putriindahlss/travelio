@@ -1,8 +1,13 @@
 <h1>Link Adaptable</h1>
 
 https://travelio.adaptable.app/
+Putri Indah Lestari
+2206814412 
+PBP E
 
-<h1>Tugas 2</h1>
+<details>
+<summary>Tugas 2</summary>
+    
 <h1>Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)</h1>
 
 Langkah 1: Membuat direktori dengan nama travelio di git dan menambahkan dependencies. Setelah itu saya membuat proyek Django dengan nama travelio dengan perintah django-admin startproject travelio .
@@ -50,8 +55,11 @@ MVC (Model View Controller), MVT (Model View Template), MVVM (Model View ViewMod
 - ViewModel: Perantara model dan view, mengubah data dari model jadi format yang bisa ditampilkan oleh view, menangani tindakan pengguna yang diteruskan ke model.
 
 Perbedaan ketiganya adalah cara mengatur interaksi antara model, view, dan pengontrol. Di mana MVC merupakan pola yang sudah digunakan dalam berbagai kerangka kerja web, MVT adalah variasi Django dengan template untuk tampilan, sedangkan MVVM digunakan dalam pengembangan aplikasi desktop dan aplikasi berbasis interface yang kompleks.
+</details>
 
-<h1>Tugas 3</h1>
+<details>
+<summary>Tugas 3</summary>
+    
 <h1>Apa perbedaan antara form POST dan form GET dalam Django?</h1>
 
 - Form POST: Mengirim data melalui permintaan HTTP POST dengan mengirimkan formulir pendaftaran atau mengirim data yang akan disimpan ke server kemudian menerima kembali responsnya. Data yang dikirim melalui POST cenderung lebih aman karena tidak terlihat dalam URL (cocok untuk data sensitif, seperti password). 
@@ -206,3 +214,4 @@ e. BONUS
 ```html
 <h2>{{ products.count }} saved item(s) in this app</h2>
 ```
+</details>
