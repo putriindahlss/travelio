@@ -198,12 +198,24 @@ d. Mengakses URL dengan Postman
 - Send request dengan method get di Postman pakai:
 - http://localhost:8000
   [![Screenshot-2023-09-18-141442.png](https://i.postimg.cc/rmt7HcC7/Screenshot-2023-09-18-141442.png)](https://postimg.cc/mzBdcvnS)
+
+  [![Screenshot-2023-09-20-091821.png](https://i.postimg.cc/HWZ6kSw2/Screenshot-2023-09-20-091821.png)](https://postimg.cc/qgKsmxZh)
+
+  [![Screenshot-2023-09-20-091833.png](https://i.postimg.cc/5NQSNfN4/Screenshot-2023-09-20-091833.png)](https://postimg.cc/3d7vt5vV)
+
+  [![Screenshot-2023-09-20-091847.png](https://i.postimg.cc/VNgjH64R/Screenshot-2023-09-20-091847.png)](https://postimg.cc/mcczPTvz)
+
+  [![Screenshot-2023-09-20-091856.png](https://i.postimg.cc/Y9S1cHsw/Screenshot-2023-09-20-091856.png)](https://postimg.cc/WDQDrQV9)
+  
 - http://localhost:8000/xml
   [![Screenshot-2023-09-18-141548.png](https://i.postimg.cc/1tpJ6zKR/Screenshot-2023-09-18-141548.png)](https://postimg.cc/WF1GcTKx)
+  
 - http://localhost:8000/xml/1
   [![Screenshot-2023-09-18-141717.png](https://i.postimg.cc/LXdxnPL0/Screenshot-2023-09-18-141717.png)](https://postimg.cc/CZNG2zvj)
+  
 - http://localhost:8000/json
   [![Screenshot-2023-09-18-141744.png](https://i.postimg.cc/WbsfG0KB/Screenshot-2023-09-18-141744.png)](https://postimg.cc/Wtfnjqs8)
+  
 - http://localhost:8000/json/1
   [![Screenshot-2023-09-18-141803.png](https://i.postimg.cc/jS5g9tRv/Screenshot-2023-09-18-141803.png)](https://postimg.cc/3dsF0M4D)
 
