@@ -13,12 +13,64 @@ PBP E
 Langkah 1: Membuat direktori dengan nama travelio di git dan menambahkan dependencies. Setelah itu saya membuat proyek Django dengan nama travelio dengan perintah django-admin startproject travelio .
 
 Langkah 2: Membuat aplikasi main di proyek Django. Setelah menjalankan perintah di langkah 1, terbentuk direktori main. Lalu, jalankan python manage.py startapp main dan tambahkan 'main' ke list INSTALLED_APPS di settings.py (berdasarkan tutorial).
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'main', 
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+```
 
-Langkah 3: Routing di proyek dengan membuat berkas urls.py di direktori main. Setelah itu, buka urls.py di direktori travelio. Import fungsi include from django.url agar adaptable bisa diakses.
+Langkah 3: Routing di proyek dengan membuat berkas urls.py di direktori main.
+```python
+from django.urls import path
+from main.views import show_main
 
-Langkah 4: Membuat model di aplikasi main dan mengisi dengan atribut name, amount, dan description.
+app_name = 'main'
 
-Langkah 5: Mengimpor fungsi render dan menambahkan fungsi untuk dikembalikan ke template HTML.
+urlpatterns = [
+    path('', show_main, name='show_main'),
+]
+```
+
+Setelah itu, buka urls.py di direktori travelio. Import fungsi include from django.url agar adaptable bisa diakses.
+```python
+from django.contrib import admin
+from django.urls import path
+from django.urls import path, include
+
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('main.urls')),
+]
+```
+
+Langkah 4: Membuat model di aplikasi main dan mengisi dengan atribut name, amount, dan description, lalu migrasi model.
+```python
+from django.db import models
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    amount = models.IntegerField()
+    description = models.TextField()
+
+```
+
+Langkah 5: Mengimpor fungsi render di views.py dan menambahkan fungsi untuk dikembalikan ke template HTML.
+```python
+def show_main(request):
+    context = {
+        'name': 'Putri Indah Lestari',
+        'class' : 'PBP E'
+    }
+
+    return render(request, "main.html", context)
+```
 
 Langkah 6: Melakukan git add commpit push di repositori travelio. Lalu, melakukan deployment aplikasi pada adaptable.
 
@@ -226,4 +278,43 @@ e. BONUS
 ```html
 <h2>{{ products.count }} saved item(s) in this app</h2>
 ```
+</details>
+
+<details>
+<summary>Tugas 4</summary>
+Implementasi Autentikasi, Session, dan Cookies pada Django
+
+<h1>Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya?</h1>
+Django UserCreationForm merupakan formulir bawaan Django untuk mempermudah pembuatan akun pengguna dalam aplikasi web dengan Django. Berikut kelebihan dan kekurangannya:
+a. Kelebihan
+- Tidak rumit dalam proses pendaftarannya karena mudah digunakan
+- Memiliki validasi bawaan untuk memastikan data pengguna sesuai dengan persyaratan yang ditentukan.
+- Form berintegrasi langsung dengan sistem otentikasi sehingga pengguna yang terdaftar mudah mengakses web.
+
+b. Kekurangan
+- Kurang fleksibel ketika menyesuaikan atribut tambahan pada model pengguna.
+- Tampilan interface harus disesuaikan supaya lebih menarik.
+
+<h1>Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?</h1>
+Autentikasi dan Otorisasi penting karena keduanya membantu melindungi keamanan dan integritas webyang kita buat. Autentikasi dapat memastikan hanya pengguna terdaftar yang dapat mengakses web, sedangkan Otorisasi akan mengontrol atau membatasi akses ke bagian sensitif web.
+
+Perbedaannya adalah:
+a. Autentikasi: Proses verifikasi identitas pengguna dengan memeriksa nama pengguna dan kata sandi yang dimasukkan. Lalu sistem akan memastikan hanya pengguna terdaftar yang dapat login atau mengakses web.
+b. Otorisasi: Proses yang menentukan apa yang diizinkan atau dilarang bagi pengguna yang telah terautentikasi. Hal ini dilakukan untuk membatasi akses ke bagian sensitif web.
+
+<h1>Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?</h1>
+Cookies adalah sepotong data kecil yang dikirim server ke browser web pengguna lalu browser akan menyimpan cookie tersebut dan mengirimkannya kembali ke server yang sama dengan permintaan selanjutnya.
+
+Django menggunakan cookies untuk menyimpan dan mengelola data sesi pengguna, seperti preferensi atau status login. Data ini akan disimpan di server dan diidentifikasi oleh ID sesi di dalam cookie. Jadi, setiap pengguna berhasil login, Django akan membuat cookie sesi unik untuk pengguna tersebut. Cookie ini berisi ID sesi yang digunakan oleh Django untuk mengidentifikasi pengguna.
+
+<h1>Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?</h1>
+Secara default pengembangan web, penggunaan cookies aman dan sangat bermanfaat jika dikelola dengan baik. Namun, kita juga harus waspada karena cookies berpotensi melacak perilaku pengguna dan mengumpulkan informasi pribadi, data login, dan riwayat pencarian. Kalau webnya rentan, penyerang akan memanipulasi dan mengambil alih sesi pengguna. Hal ini akan mengancam keamanan data dan informasi pengguna.
+
+Untuk itu, kita dapat meminimalisir risiko dengan menggunakan HTTPS untuk melindungi cookie dari peretas, menerapkan kebijakan privasi agar pengguna paham bagaimana data mereka digunakan, dan menghapus cookies yang tidak diperlukan secara teratur. 
+
+<h1>Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).</h1>
+
+
+<h1>BONUS</h1>
+
 </details>
