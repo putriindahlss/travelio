@@ -321,6 +321,7 @@ Untuk itu, kita dapat meminimalisir risiko dengan menggunakan HTTPS untuk melind
 
 <h1>Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).</h1>
 Langkah 1: Implementasi fungsi registrasi, login, dan logout dengan menambahkan import di views.py dalam direktori main.
+
 ```python
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
@@ -620,6 +621,7 @@ path('delete-product/<int:id>/', delete_product, name='delete_product'),
 dan jangan lupa impor add_amount, decrement_amount, delete_product.
 
 <h2>Tampilannya sebagai berikut</h2>
+
 [![Screenshot-2023-09-26-155136.png](https://i.postimg.cc/4dcmsbZN/Screenshot-2023-09-26-155136.png)](https://postimg.cc/1n99KFfL)
 
 </details>
