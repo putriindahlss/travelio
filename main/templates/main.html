@@ -1,48 +1,126 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Shopping List Page</h1>
+    <style>
+        /* Define the blue color theme */
+        body {
+            background-color: #f0f5f9;
+            font-family: 'Roboto', sans-serif; /* Change to your preferred font */
+            color: #333;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif; /* Change to your preferred font */
+            font-size: 36px;
+            color: #0074e4;
+            margin-bottom: 20px;
+        }
+
+        h5 {
+            font-family: 'Montserrat', sans-serif; /* Change to your preferred font */
+            color: #0074e4;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%; /* Adjust the table width as needed */
+            margin: 20px auto; /* Center the table horizontally */
+        }
+
+        th, td {
+            border: 1px solid #0074e4;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0074e4;
+            color: white;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        button {
+            background-color: #0074e4;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0057b3;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <h1>Travelio</h1>
+    <p>We travel with Satrio</p>
 
     <h5>Name:</h5>
-    <p>{{name}}</p>
+    <p>Putri</p>
 
     <h5>Class:</h5>
-    <p>{{class}}</p>
+    <p>PBP E</p>
 
-<h2>{{ products.count }} saved item(s) in this app</h2>
+    <h2>Welcome {{ name }}!</h2>
+    <h2>{{ products.count }} saved item(s) in this app</h2>
 
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Description</th>
-    </tr>
-
-    {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
-
-    {% for product in products %}
+    <table>
         <tr>
-            <td>{{product.name}}</td>
-            <td>{{product.amount}}</td>
-            <td>{{product.description}}</td>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Action</th>
         </tr>
-    {% endfor %}
-</table>
 
-<br />
+        {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
 
-<h5>Sesi terakhir login: {{ last_login }}</h5>
+        {% for product in products %}
+            <tr>
+                <td>{{product.name}}</td>
+                <td>
+                    {{ product.amount }}
+                    <a href="{% url 'main:add_amount' product.id %}">
+                        <button>+</button>
+                    </a>
+                    <a href="{% url 'main:decrement_amount' product.id %}">
+                        <button>-</button>
+                    </a>
+                </td>
+                <td>{{product.description}}</td>
+                <td>
+                    <a href="{% url 'main:delete_product' product.id %}">
+                        <button>Delete</button>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 
-<a href="{% url 'main:create_product' %}">
-    <button>
-        Add New Product
-    </button>
-</a>
+    <br />
 
-<a href="{% url 'main:logout' %}">
-    <button>
-        Logout
-    </button>
-</a>
+    <h5>Sesi terakhir login: {{ last_login }}</h5>
+
+    <a href="{% url 'main:create_product' %}">
+        <button>
+            Add New Product
+        </button>
+    </a>
+
+    <a href="{% url 'main:logout' %}">
+        <button>
+            Logout
+        </button>
+    </a>
      
 {% endblock content %}

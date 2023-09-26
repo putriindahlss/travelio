@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from main.forms import ProductForm
 from django.urls import reverse
@@ -40,6 +40,28 @@ def create_product(request):
 
     context = {'form': form}
     return render(request, "create_product.html", context)
+
+#IMPLEMENTASI BONUS
+def add_amount(request, id):
+    product = get_object_or_404(Product, pk=id)
+    if product.amount >= 0:
+        product.amount += 1
+        product.save()
+    return HttpResponseRedirect(reverse('main:show_main'))
+
+def decrement_amount(request, id):
+    product = get_object_or_404(Product, pk=id)
+    if product.amount > 0:
+        product.amount -= 1
+        product.save()
+    return HttpResponseRedirect(reverse('main:show_main'))
+
+def delete_product(request, id):
+    product = get_object_or_404(Product, pk=id)
+    if product.user == request.user:
+        product.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))
+
 
 def show_xml(request):
     data = Product.objects.all()
