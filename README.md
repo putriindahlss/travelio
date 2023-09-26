@@ -289,6 +289,7 @@ Implementasi Autentikasi, Session, dan Cookies pada Django
 <h1>Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya?</h1>
 
 Django UserCreationForm merupakan formulir bawaan Django untuk mempermudah pembuatan akun pengguna dalam aplikasi web dengan Django. Berikut kelebihan dan kekurangannya:
+
 a. Kelebihan
 - Tidak rumit dalam proses pendaftarannya karena mudah digunakan
 - Memiliki validasi bawaan untuk memastikan data pengguna sesuai dengan persyaratan yang ditentukan.
@@ -303,6 +304,7 @@ b. Kekurangan
 Autentikasi dan Otorisasi penting karena keduanya membantu melindungi keamanan dan integritas webyang kita buat. Autentikasi dapat memastikan hanya pengguna terdaftar yang dapat mengakses web, sedangkan Otorisasi akan mengontrol atau membatasi akses ke bagian sensitif web.
 
 Perbedaannya adalah:
+
 a. Autentikasi: Proses verifikasi identitas pengguna dengan memeriksa nama pengguna dan kata sandi yang dimasukkan. Lalu sistem akan memastikan hanya pengguna terdaftar yang dapat login atau mengakses web.
 
 b. Otorisasi: Proses yang menentukan apa yang diizinkan atau dilarang bagi pengguna yang telah terautentikasi. Hal ini dilakukan untuk membatasi akses ke bagian sensitif web.
