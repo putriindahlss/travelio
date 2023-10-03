@@ -5,41 +5,68 @@
 {% endblock meta %}
 
 {% block content %}
+<style>
+    /* Menggunakan font Pacifico untuk judul */
+    h3.title.has-text-black {
+        font-family: 'Nunito', cursive;
+    }
+</style>
+<body>
+    <section class="hero is-success is-fullheight" style="background-image: url(https://i.ibb.co/brZrkFg/awan.jpg); background-size: cover; background-position: center;">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="column is-4 is-offset-4">
+                    <h3 class="title has-text-black">Travelio Login</h3>
+                    <hr class="login-hr">
+                    <p class="subtitle has-text-black">Please login to proceed.</p>
+                    <div class="box">
+                        <figure class="avatar">
+                            <img src="https://i.postimg.cc/3NjHqRgd/Untitled-design.png">
+                        </figure>
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <div class="field">
+                                <div class="control">
+                                    <input class="input is-large" type="text" name="username" placeholder="Username" autofocus="" class="form-control">
+                                </div>
+                            </div>
 
-<div class = "login">
+                            <div class="field">
+                                <div class="control">
+                                    <input class="input is-large" type="password" name="password" placeholder="Your Password" class="form-control">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                    <div class="level-item has-text-centered">
+                        <div>
+                          <a href="{% url 'main:register' %}">Register Now</a>
+                        </div>
+                      </div>
+                </label>
+                            </div>
+                            <button class="button is-block is-info is-large is-fullwidth" type="submit" value="Login">Login <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                        </form>
+                        {% if messages %}
+                            <ul>
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}    
+                        
+                    </div>
+                    <p class="has-text-grey">
+                        <a href="../">Sign Up</a> &nbsp;·&nbsp;
+                        <a href="../">Forgot Password</a> &nbsp;·&nbsp;
+                        <a href="../">Need Help?</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script async type="text/javascript" src="../js/bulma.js"></script>
+</body>
 
-    <h1>Login</h1>
-
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
-        
-    Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
-
-</div>
 
 {% endblock content %}

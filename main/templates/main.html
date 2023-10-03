@@ -1,126 +1,144 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <style>
-        /* Define the blue color theme */
-        body {
-            background-color: #f0f5f9;
-            font-family: 'Roboto', sans-serif; /* Change to your preferred font */
-            color: #333;
-        }
+<body>
+    <section class="hero is-info is-fullheight"style="background-image: url(https://i.ibb.co/brZrkFg/awan.jpg); background-size: cover; background-position: center;">
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <a class="navbar-item" href="../">
+                            <img src="https://i.postimg.cc/3NjHqRgd/Untitled-design.png" alt="Logo">
+                        </a>
+                        <span class="navbar-burger burger" data-target="navbarMenu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </div>
+                    <div id="navbarMenu" class="navbar-menu">
+                        <div class="navbar-end">
+                            <span class="navbar-item">
+                                <a class="button is-white is-outlined" href="{% url 'main:logout' %}">
+                                    <span class="icon">
+                                        <i class="fa fa-github"></i>
+                                    </span>
+                                    <span>Logout</span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            </div>
 
-        h1 {
-            font-family: 'Montserrat', sans-serif; /* Change to your preferred font */
-            font-size: 36px;
-            color: #0074e4;
-            margin-bottom: 20px;
-        }
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <div class="column is-full">
+                        <h1 class="title text-black">
+                            Travelio
+                        </h1>
+                        <h2 class="subtitle text-black">
+                            Explore unforgettable adventures worldwide, discover amazing destinations, and plan your dream journey with us today! 
+                        </h2>
+                        <section class="section">
+                            <div class="container">
+                                <h7 class="title has-text-black is-size-5">{{ products.count }} saved item(s) in this app</h7>
+                                <div class="table-container">
+                                    <table class="custom-table is-striped is-narrow is-hoverable is-fullwidth">
+                                        <style>
+                                            table {
+                                                width: 100%;
+                                            }
+                                        
+                                            .custom-table {
+                                                background-color: #754747; 
+                                                border-collapse: collapse;
+                                                border-radius: 7px; 
+                                                overflow: hidden;
+                                                margin-bottom: 30px; 
+                                            }
+                                        
+                                            .custom-table th, .custom-table td {
+                                                border: 1px solid #5d4848; 
+                                                padding: 8px;
+                                                text-align: center;
+                                            }
+                                        
+                                            .custom-table th {
+                                                background-color: #cbacac; 
+                                                border: #574040;
+                                            }
+                                        
+                                            .custom-table tr {
+                                                background-color: #d0b1b1;
+                                                border: 1px solid #958787; 
+                                            }
+                                            .custom-table tbody tr:last-child {
+                                                background-color: #97afc8;
+                                            }
 
-        h5 {
-            font-family: 'Montserrat', sans-serif; /* Change to your preferred font */
-            color: #0074e4;
-        }
+                                            .button.is-small {
+                                                margin-right: 10px; 
+                                            }
 
-        table {
-            border-collapse: collapse;
-            width: 80%; /* Adjust the table width as needed */
-            margin: 20px auto; /* Center the table horizontally */
-        }
+    
+                                        </style>
+                                        <thead class="is-justify-content-center">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Amount</th>
+                                                <th>Description</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for product in products %}
+                                            <tr>
+                                                <td>{{product.name}}</td>
+                                                <td>
+                                                    {{ product.amount }}
+                                                    <div class="field is-grouped is-justify-content-center">
+                                                        <div class="control">
+                                                            <a href="{% url 'main:add_amount' product.id %}" class="button is-small">+</a>
+                                                        </div>
+                                                        <div class="control">
+                                                            <a href="{% url 'main:decrement_amount' product.id %}" class="button is-small">-</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>{{product.description}}</td>
+                                                <td>
+                                                    <a href="{% url 'main:delete_product' product.id %}" class="button is-danger">Delete</a>
+                                                    <a href="{% url 'main:edit_product' product.pk %}" class="button is-info">Edit</a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <div class="container">
+                                        <h5 class="title has-text-black is-size-5">Last login session: {{ last_login }}</h5>
+                                    
+                                        <a href="{% url 'main:create_product' %}" class="button is-success">
+                                            Add New Product
+                                        </a>
+                                    
+                                        <a href="{% url 'main:logout' %}" class="button is-danger">
+                                            Logout
+                                        </a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </section>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        th, td {
-            border: 1px solid #0074e4;
-            padding: 10px;
-            text-align: left;
-        }
+    </section>
+    <script async type="text/javascript" src="../js/bulma.js"></script>
+</body>
 
-        th {
-            background-color: #0074e4;
-            color: white;
-        }
-
-        p {
-            margin: 0;
-        }
-
-        button {
-            background-color: #0074e4;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0057b3;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
-
-    <h1>Travelio</h1>
-    <p>We travel with Satrio</p>
-
-    <h5>Name:</h5>
-    <p>Putri</p>
-
-    <h5>Class:</h5>
-    <p>PBP E</p>
-
-    <h2>Welcome {{ name }}!</h2>
-    <h2>{{ products.count }} saved item(s) in this app</h2>
-
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Amount</th>
-            <th>Description</th>
-            <th>Action</th>
-        </tr>
-
-        {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
-
-        {% for product in products %}
-            <tr>
-                <td>{{product.name}}</td>
-                <td>
-                    {{ product.amount }}
-                    <a href="{% url 'main:add_amount' product.id %}">
-                        <button>+</button>
-                    </a>
-                    <a href="{% url 'main:decrement_amount' product.id %}">
-                        <button>-</button>
-                    </a>
-                </td>
-                <td>{{product.description}}</td>
-                <td>
-                    <a href="{% url 'main:delete_product' product.id %}">
-                        <button>Delete</button>
-                    </a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
-
-    <br />
-
-    <h5>Sesi terakhir login: {{ last_login }}</h5>
-
-    <a href="{% url 'main:create_product' %}">
-        <button>
-            Add New Product
-        </button>
-    </a>
-
-    <a href="{% url 'main:logout' %}">
-        <button>
-            Logout
-        </button>
-    </a>
-     
 {% endblock content %}

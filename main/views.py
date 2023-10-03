@@ -14,6 +14,8 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.models import User
+
 
 @login_required(login_url='/login')
 
@@ -40,6 +42,21 @@ def create_product(request):
 
     context = {'form': form}
     return render(request, "create_product.html", context)
+
+def edit_product(request, id):
+    # Get product berdasarkan ID
+    product = Product.objects.get(pk = id)
+
+    # Set product sebagai instance dari form
+    form = ProductForm(request.POST or None, instance=product)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_product.html", context)
 
 #IMPLEMENTASI BONUS
 def add_amount(request, id):
@@ -80,16 +97,26 @@ def show_json_by_id(request, id):
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def register(request):
-    form = UserCreationForm()
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        confirm_password = request.POST['confirm_password']
 
-    if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Your account has been successfully created!')
-            return redirect('main:login')
-    context = {'form':form}
-    return render(request, 'register.html', context)
+        if password == confirm_password:
+            if User.objects.filter(username=username).exists():
+                messages.info(request, 'Username taken')
+                return redirect('main:register')
+            else:
+                user = User.objects.create_user(username=username, password=password)
+                user.save()
+                messages.success(request, 'Your account has been successfully created!')
+                return redirect('main:login')
+
+        else:
+            messages.info(request, 'Password not matching..')
+            return redirect('main:register')
+    else:
+        return render(request, 'register.html')
 
 def login_user(request):
     if request.method == 'POST':
