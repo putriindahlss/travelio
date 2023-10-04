@@ -635,6 +635,7 @@ Desain Web menggunakan HTML, CSS dan Framework CSS
 <h1>Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.</h1>
 
 Element selector memilih elemen HTML berdasarkan nama tag yang sebaiknya digunakan ketika kita ingin menerapkan gaya yang konsisten dan seragam untuk elemen yang sama di seluruh halaman web. 
+
 Contohnya, selector p akan memilih semua elemen `<p>` di dokumen. 
 
 Element selector berguna untuk mengatur gaya umum untuk elemen tertentu, seperti ukuran font, margin, warna font, padding, dll. 
