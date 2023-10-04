@@ -633,12 +633,14 @@ dan jangan lupa impor add_amount, decrement_amount, delete_product.
 Desain Web menggunakan HTML, CSS dan Framework CSS
 
 <h1>Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.</h1>
+
 Element selector memilih elemen HTML berdasarkan nama tag yang sebaiknya digunakan ketika kita ingin menerapkan gaya yang konsisten dan seragam untuk elemen yang sama di seluruh halaman web. 
 Contohnya, selector p akan memilih semua elemen <p> di dokumen. 
 
 Element selector berguna untuk mengatur gaya umum untuk elemen tertentu, seperti ukuran font, margin, warna font, padding, dll. 
 
 <h1>Jelaskan HTML5 Tag yang kamu ketahui.</h1>
+
 HTML Tag merupakan emelen dasar yang berisi instruksi ke browser bagaimana menampilkan konten dalam pembuatan halaman web. HTML5 merupakan versi terbaru dan lebih lengkap dari HTML untuk mengembangkan halaman web yang lebih modern. Beberapa di antaranya:
 1. '<nav>' : Untuk mengelompokkan tautan navigasi.
 2. '<video>': Untuk menampilkan dan memutar video di halaman web.
@@ -661,6 +663,7 @@ b. PADDING
 - Bisa memiliki background color.
 
 <h1>Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?</h1>
+
 Berikut adalah perbedaan antara framework CSS Tailwind dan Bootstrap:
 
 a. CSS Tailwind
