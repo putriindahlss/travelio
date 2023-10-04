@@ -678,7 +678,481 @@ Penggunaan Bootstrap sebaiknya digunakan ketika ingin desain yang siap pakai dan
 
 <h1>Implementasi Checklist</h1>
 
-<h1>BONUS</h1>
+Langkah 1: Saya melakukan kustomisasi desain dengan menggunakan CSS framework yaitu Bulma. Pertama-tama saya melakukan instalasi Bulma  
+```html
+<!-- Bulma Version 0.9.x-->
+        <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.4/css/bulma.min.css" />
+        <link rel="stylesheet" type="text/css" href="../css/login.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+J4jsl5c9zdLKaUk5Ae5f5b1bw6AUn5f5v8FZJoMxm6f5cH1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+```
 
+Langkah 2: Kustomisasi Login Page
+
+```html
+<style>
+    /* Menggunakan font Pacifico untuk judul */
+    h3.title.has-text-black {
+        font-family: 'Nunito', cursive;
+    }
+</style>
+<body>
+    <section class="hero is-success is-fullheight" style="background-image: url(https://i.ibb.co/brZrkFg/awan.jpg); background-size: cover; background-position: center;">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="column is-4 is-offset-4">
+                    <h3 class="title has-text-black">Travelio Login</h3>
+                    <hr class="login-hr">
+                    <p class="subtitle has-text-black">Please login to proceed.</p>
+                    <div class="box">
+                        <figure class="avatar">
+                            <img src="https://i.postimg.cc/3NjHqRgd/Untitled-design.png">
+                        </figure>
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <div class="field">
+                                <div class="control">
+                                    <input class="input is-large" type="text" name="username" placeholder="Username" autofocus="" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div class="control">
+                                    <input class="input is-large" type="password" name="password" placeholder="Your Password" class="form-control">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                    <div class="level-item has-text-centered">
+                        <div>
+                          <a href="{% url 'main:register' %}">Register Now</a>
+                        </div>
+                      </div>
+                </label>
+                            </div>
+                            <button class="button is-block is-info is-large is-fullwidth" type="submit" value="Login">Login <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                        </form>
+                        {% if messages %}
+                            <ul>
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}    
+                        
+                    </div>
+                    <p class="has-text-grey">
+                        <a href="../">Sign Up</a> &nbsp;·&nbsp;
+                        <a href="../">Forgot Password</a> &nbsp;·&nbsp;
+                        <a href="../">Need Help?</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script async type="text/javascript" src="../js/bulma.js"></script>
+</body>
+```
+
+Langkah 3: Kustomisasi Register Page
+
+```html
+<body>
+    <section class="container" style="background-image: url(https://i.ibb.co/brZrkFg/awan.jpg); background-size: cover; background-position: center;">
+      <div class="columns is-multiline">
+        <div class="column is-8 is-offset-2 register">
+          <div class="columns">
+            <div class="column left">
+              <h1 class="title is-1">Travelio</h1>
+              <h2 class="subtitle colored is-4">Explore unforgettable adventures worldwide, discover amazing destinations, and plan your dream journey with us today! 
+              </h2>
+            </div>
+            <div class="column right has-text-centered">
+              <h1 class="title is-4">Sign up today</h1>
+              <p class="description">Create your account by filling the form below</p>
+              <form method="POST" action="{% url 'main:register' %}">
+                {% csrf_token %}
+                <div class="field">
+                  <div class="control">
+                    <input class="input is-medium" type="text" placeholder="Username" id="Username" name="username">
+                  </div>
+                </div>
+
+                <div class="field">
+                  <div class="control">
+                    <input class="input is-medium" type="password" placeholder="Password"  id="Password" name="password">
+                  </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                      <input class="input is-medium" type="password" placeholder="Confirm password"  id="confirm_password" name="confirm_password">
+                    </div>
+                  </div>
+                <button class="button is-block is-primary is-fullwidth is-medium" value="Daftar">Submit</button>
+                <br />
+                <small><em>Already have an account?<a href="{% url 'main:login' %}">Login</a></em></small>
+              </form>
+            {% if messages %}  
+                <ul>   
+                    {% for message in messages %}  
+                        <li>{{ message }}</li>  
+                    {% endfor %}  
+                </ul>   
+            {% endif %}
+
+            </div>
+          </div>
+        </div>
+        <div class="column is-8 is-offset-2">
+          <br>
+          <nav class="level">
+            <div class="level-left">
+              <div class="level-item">
+                <span class="icon">
+                  <i class="fab fa-twitter"></i>
+                </span> &emsp;
+                <span class="icon">
+                  <i class="fab fa-facebook"></i>
+                </span> &emsp;
+                <span class="icon">
+                  <i class="fab fa-instagram"></i>
+                </span> &emsp;
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span> &emsp;
+                <span class="icon">
+                  <i class="fas fa-envelope"></i>
+                </span>
+              </div>
+            </div>
+            <div class="level-right">
+              <small class="level-item" style="color: var(--textLight)">
+                &copy; Putri Indah Lestari
+              </small>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </section>
+  </body>
+  <style>
+    :root {
+      --brandColor: hsl(166, 67%, 51%);
+      --background: rgb(247, 247, 247);
+      --textDark: hsla(0, 0%, 0%, 0.66);
+      --textLight: hsla(0, 0%, 0%, 0.33);
+    }
+
+    body {
+      background: var(--background);
+      height: 100vh;
+      color: var(--textDark);
+    }
+
+    .field:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    .register {
+      margin-top: 10rem;
+      background: white;
+      border-radius: 10px;
+    }
+
+    .left,
+    .right {
+      padding: 4.5rem;
+    }
+
+    .left {
+      border-right: 5px solid var(--background);
+    }
+
+    .left .title {
+      font-weight: 800;
+      letter-spacing: -2px;
+    }
+
+    .left .colored {
+      color: var(--brandColor);
+      font-weight: 500;
+      margin-top: 1rem !important;
+      letter-spacing: -1px;
+    }
+
+    .left p {
+      color: var(--textLight);
+      font-size: 1.15rem;
+    }
+
+    .right .title {
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .right .description {
+      margin-top: 1rem;
+      margin-bottom: 1rem !important;
+      color: var(--textLight);
+      font-size: 1.15rem;
+    }
+
+    .right small {
+      color: var(--textLight);
+    }
+
+    input {
+      font-size: 1rem;
+    }
+
+    input:focus {
+      border-color: var(--brandColor) !important;
+      box-shadow: 0 0 0 1px var(--brandColor) !important;
+    }
+
+    .fab,
+    .fas {
+      color: var(--textLight);
+      margin-right: 1rem;
+    }
+
+  </style>
+```
+
+Langkah 4: Kustomisasi Main Page
+
+```html
+<body>
+    <section class="hero is-info is-fullheight"style="background-image: url(https://i.ibb.co/brZrkFg/awan.jpg); background-size: cover; background-position: center;">
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <a class="navbar-item" href="../">
+                            <img src="https://i.postimg.cc/3NjHqRgd/Untitled-design.png" alt="Logo">
+                        </a>
+                        <span class="navbar-burger burger" data-target="navbarMenu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </div>
+                    <div id="navbarMenu" class="navbar-menu">
+                        <div class="navbar-end">
+                            <span class="navbar-item">
+                                <a class="button is-white is-outlined" href="{% url 'main:logout' %}">
+                                    <span class="icon">
+                                        <i class="fa fa-github"></i>
+                                    </span>
+                                    <span>Logout</span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            </div>
+
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <div class="column is-full">
+                        <h1 class="title text-black">
+                            Travelio
+                        </h1>
+                        <h2 class="subtitle text-black">
+                            Explore unforgettable adventures worldwide, discover amazing destinations, and plan your dream journey with us today! 
+                        </h2>
+                        <section class="section">
+                            <div class="container">
+                                <h7 class="title has-text-black is-size-5">
+                                    {{ products.count }} saved item(s) in this app</h7>
+                                <div class="table-container">
+                                    <table class="custom-table is-striped is-narrow is-hoverable is-fullwidth">
+                                        <style>
+                                            table {
+                                                width: 100%;
+                                            }
+                                        
+                                            .custom-table {
+                                                background-color: #754747; 
+                                                border-collapse: collapse;
+                                                border-radius: 7px; 
+                                                overflow: hidden;
+                                                margin-bottom: 30px; 
+                                            }
+                                        
+                                            .custom-table th, .custom-table td {
+                                                border: 1px solid #5d4848; 
+                                                padding: 8px;
+                                                text-align: center;
+                                            }
+                                        
+                                            .custom-table th {
+                                                background-color: #cbacac; 
+                                                border: #574040;
+                                            }
+                                        
+                                            .custom-table tr {
+                                                background-color: #d0b1b1;
+                                                border: 1px solid #958787; 
+                                            }
+                                            .custom-table tbody tr:last-child {
+                                                background-color: #97afc8;
+                                            }
+
+                                            .button.is-small {
+                                                margin-right: 10px; 
+                                            }
+
+    
+                                        </style>
+                                        <thead class="is-justify-content-center">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Amount</th>
+                                                <th>Description</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for product in products %}
+                                            <tr>
+                                                <td>{{product.name}}</td>
+                                                <td>
+                                                    {{ product.amount }}
+                                                    <div class="field is-grouped is-justify-content-center">
+                                                        <div class="control">
+                                                            <a href="{% url 'main:add_amount' product.id %}" class="button is-small">+</a>
+                                                        </div>
+                                                        <div class="control">
+                                                            <a href="{% url 'main:decrement_amount' product.id %}" class="button is-small">-</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>{{product.description}}</td>
+                                                <td>
+                                                    <a href="{% url 'main:delete_product' product.id %}" class="button is-danger">Delete</a>
+                                                    <a href="{% url 'main:edit_product' product.pk %}" class="button is-info">Edit</a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <div class="container">
+                                        <h5 class="title has-text-black is-size-5">Last login session: {{ last_login }}</h5>
+                                    
+                                        <a href="{% url 'main:create_product' %}" class="button is-success">
+                                            Add New Product
+                                        </a>
+                                    
+                                        <a href="{% url 'main:logout' %}" class="button is-danger">
+                                            Logout
+                                        </a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </section>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </section>
+    <script async type="text/javascript" src="../js/bulma.js"></script>
+</body>
+```
+
+Langkah 5: Kustomisasi Add New Product dan Edit Product Page
+```html
+<body class="bg-yellow-50">
+    <div class="container my-10 shadow-lg rounded-lg p-8 divide-y bg-gray-100">
+      <h1 class="text-xl font-bold text-center text-red-800 text-firebrick">Add New Destination</h1>
+      <form method="POST" class="mt-4">
+        {% csrf_token %}
+        <table class="w-full">
+          {{ form.as_table }}
+          <tr>
+            <td class="py-3"></td>
+            <td class="py-3">
+              <div class="flex items-center space-x-4">
+                <input type="submit" value="Add Product"
+                class="w-full bg-black text-white font-bold py-2 px-4 rounded hover:bg-gray-900 focus:outline-none focus:ring-green-500 px-3 py-2" />
+              </div>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+</body>
+```
+
+```html
+<body class="bg-yellow-50">
+    <div class="container my-10 shadow-lg rounded-lg p-8 divide-y bg-gray-100">
+      <h1 class="text-xl font-bold text-center text-red-800 text-firebrick">Edit Destination</h1>
+      <form method="POST" class="mt-4">
+        {% csrf_token %}
+        <table class="w-full">
+          {{ form.as_table }}
+          <tr>
+            <td class="py-3"></td>
+            <td class="py-3">
+              <div class="flex items-center space-x-4">
+                <input type="submit" value="Edit Product"
+                class="w-full bg-black text-white font-bold py-2 px-4 rounded hover:bg-gray-900 focus:outline-none focus:ring-green-500 px-3 py-2" />              </div>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+</body>
+```
+
+<h1>BONUS</h1>
+Membedakan warna tabel paling terakhir.
+
+```html
+<table class="custom-table is-striped is-narrow is-hoverable is-fullwidth">
+    <style>
+        table {
+            width: 100%;
+        }
+    
+        .custom-table {
+            background-color: #754747; 
+            border-collapse: collapse;
+            border-radius: 7px; 
+            overflow: hidden;
+            margin-bottom: 30px; 
+        }
+    
+        .custom-table th, .custom-table td {
+            border: 1px solid #5d4848; 
+            padding: 8px;
+            text-align: center;
+        }
+    
+        .custom-table th {
+            background-color: #cbacac; 
+            border: #574040;
+        }
+    
+        .custom-table tr {
+            background-color: #d0b1b1;
+            border: 1px solid #958787; 
+        }
+        .custom-table tbody tr:last-child {
+            background-color: #97afc8;
+        }
+        .button.is-small {
+            margin-right: 10px; 
+        }
+```
+    
 </details>
 
