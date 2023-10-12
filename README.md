@@ -635,23 +635,25 @@ Desain Web menggunakan HTML, CSS dan Framework CSS
 <h1>Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.</h1>
 
 Element selector memilih elemen HTML berdasarkan nama tag yang sebaiknya digunakan ketika kita ingin menerapkan gaya yang konsisten dan seragam untuk elemen yang sama di seluruh halaman web. 
-Contohnya, selector p akan memilih semua elemen <p> di dokumen. 
+
+Contohnya, selector p akan memilih semua elemen `<p>` di dokumen. 
 
 Element selector berguna untuk mengatur gaya umum untuk elemen tertentu, seperti ukuran font, margin, warna font, padding, dll. 
 
 <h1>Jelaskan HTML5 Tag yang kamu ketahui.</h1>
 
 HTML Tag merupakan emelen dasar yang berisi instruksi ke browser bagaimana menampilkan konten dalam pembuatan halaman web. HTML5 merupakan versi terbaru dan lebih lengkap dari HTML untuk mengembangkan halaman web yang lebih modern. Beberapa di antaranya:
-1. '<nav>' : Untuk mengelompokkan tautan navigasi.
-2. '<video>': Untuk menampilkan dan memutar video di halaman web.
-3. '<time>':  Untuk menunjukkan tanggal atau waktu dalam format tertentu.
-4. '<details>' dan '<summary>': Untuk membuat konten yang dapat dibuka dan ditutup, seperti yang saya gunakan pada tugas ini.
-5. '<audio>' : Untuk menampilkan dan memutar audio di halaman web.
-6. '<canvas>' : Menentukan area grafis yang dapat digambar dengan menggunakan skrip (biasanya JavaScript), seperti membuat grafik, animasi, game, dll.
-7. '<figure>' : Menentukan konten mandiri yang biasanya memiliki keterangan, seperti gambar, diagram, kutipan, dll.
-8. '<article>' : Menentukan konten mandiri yang dapat berdiri sendiri atau didistribusikan secara terpisah, seperti artikel blog, berita, komentar, dll.
+1. `<nav>` : Untuk mengelompokkan tautan navigasi.
+2. `<video>`: Untuk menampilkan dan memutar video di halaman web.
+3. `<time>`:  Untuk menunjukkan tanggal atau waktu dalam format tertentu.
+4. `<details>` dan `<summary>`: Untuk membuat konten yang dapat dibuka dan ditutup, seperti yang saya gunakan pada tugas ini.
+5. `<audio>` : Untuk menampilkan dan memutar audio di halaman web.
+6. `<canvas>` : Menentukan area grafis yang dapat digambar dengan menggunakan skrip (biasanya JavaScript), seperti membuat grafik, animasi, game, dll.
+7. `<figure>` : Menentukan konten mandiri yang biasanya memiliki keterangan, seperti gambar, diagram, kutipan, dll.
+8. `<article>` : Menentukan konten mandiri yang dapat berdiri sendiri atau didistribusikan secara terpisah, seperti artikel blog, berita, komentar, dll.
 
 <h1>Jelaskan perbedaan antara margin dan padding.</h1>
+
 Margin dan Padding merupakan konsep dalam CSS untuk mengatur tata letak dan tampilan pada elemen html di web. Secara garis besar, margin mengatur ruang di luar batas elemen (border), sementara padding mengatur ruang di dalam batas elemen (border):
 
 a. MARGIN
