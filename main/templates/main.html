@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.2/css/bulma.min.css">
+</head>
+
 <body>
-    <section class="hero is-info is-fullheight"style="background-image: url(https://i.ibb.co/brZrkFg/awan.jpg); background-size: cover; background-position: center;">
+    <section class="hero is-info is-fullheight"
+        style="background-image: url(https://i.ibb.co/brZrkFg/awan.jpg); background-size: cover; background-position: center;">
         <div class="hero-head">
             <nav class="navbar">
                 <div class="container">
@@ -18,127 +23,189 @@
                     </div>
                     <div id="navbarMenu" class="navbar-menu">
                         <div class="navbar-end">
-                            <span class="navbar-item">
-                                <a class="button is-white is-outlined" href="{% url 'main:logout' %}">
-                                    <span class="icon">
-                                        <i class="fa fa-github"></i>
-                                    </span>
-                                    <span>Logout</span>
-                                </a>
-                            </span>
+                            <a class="navbar-item button is-white is-outlined" href="{% url 'main:logout' %}">
+                                <span class="icon">
+                                    <i class="fa fa-github"></i>
+                                </span>
+                                <span class="has-text-black">Logout</span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </nav>
+        </div>
+
+        <div class="hero-body has-text-centered">
+            <div class="container">
+                <h1 class="title has-text-black">
+                    Travelio
+                </h1>
+                <h2 class="subtitle has-text-black">
+                    Explore unforgettable adventures worldwide, discover amazing destinations, and plan your dream journey
+                    with us today!
+                </h2>
             </div>
+        </div>
 
-            <div class="hero-body">
-                <div class="container has-text-centered">
-                    <div class="column is-full">
-                        <h1 class="title text-black">
-                            Travelio
-                        </h1>
-                        <h2 class="subtitle text-black">
-                            Explore unforgettable adventures worldwide, discover amazing destinations, and plan your dream journey with us today! 
-                        </h2>
-                        <section class="section">
-                            <div class="container">
-                                <h7 class="title has-text-black is-size-5">{{ products.count }} saved item(s) in this app</h7>
-                                <div class="table-container">
-                                    <table class="custom-table is-striped is-narrow is-hoverable is-fullwidth">
-                                        <style>
-                                            table {
-                                                width: 100%;
-                                            }
-                                        
-                                            .custom-table {
-                                                background-color: #754747; 
-                                                border-collapse: collapse;
-                                                border-radius: 7px; 
-                                                overflow: hidden;
-                                                margin-bottom: 30px; 
-                                            }
-                                        
-                                            .custom-table th, .custom-table td {
-                                                border: 1px solid #5d4848; 
-                                                padding: 8px;
-                                                text-align: center;
-                                            }
-                                        
-                                            .custom-table th {
-                                                background-color: #cbacac; 
-                                                border: #574040;
-                                            }
-                                        
-                                            .custom-table tr {
-                                                background-color: #d0b1b1;
-                                                border: 1px solid #958787; 
-                                            }
-                                            .custom-table tbody tr:last-child {
-                                                background-color: #97afc8;
-                                            }
+        <div class="hero-body">
+            <div class="container">
 
-                                            .button.is-small {
-                                                margin-right: 10px; 
-                                            }
+                <div class="columns is-multiline" id="product_container"></div>
 
-    
-                                        </style>
-                                        <thead class="is-justify-content-center">
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Amount</th>
-                                                <th>Description</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for product in products %}
-                                            <tr>
-                                                <td>{{product.name}}</td>
-                                                <td>
-                                                    {{ product.amount }}
-                                                    <div class="field is-grouped is-justify-content-center">
-                                                        <div class="control">
-                                                            <a href="{% url 'main:add_amount' product.id %}" class="button is-small">+</a>
-                                                        </div>
-                                                        <div class="control">
-                                                            <a href="{% url 'main:decrement_amount' product.id %}" class="button is-small">-</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>{{product.description}}</td>
-                                                <td>
-                                                    <a href="{% url 'main:delete_product' product.id %}" class="button is-danger">Delete</a>
-                                                    <a href="{% url 'main:edit_product' product.pk %}" class="button is-info">Edit</a>
-                                                </td>
-                                            </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                    <div class="container">
-                                        <h5 class="title has-text-black is-size-5">Last login session: {{ last_login }}</h5>
-                                    
-                                        <a href="{% url 'main:create_product' %}" class="button is-success">
-                                            Add New Product
-                                        </a>
-                                    
-                                        <a href="{% url 'main:logout' %}" class="button is-danger">
-                                            Logout
-                                        </a>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </section>
-                        
-                        </div>
-                    </div>
+                <h5 class="title is-5 has-text-black has-text-centered">Last login session: {{ last_login }}</h5>
+
+                <div class="has-text-centered"> <!-- Centering the buttons -->
+                    <a href="{% url 'main:create_product' %}" class="button is-success has-text-black">Add New Product</a>
+                    <button type="button" class="button is-success has-text-black" id="addProductButton">Add New Item by AJAX</button>                    
+                    <a href="{% url 'main:logout' %}" class="btn btn-primary">Logout</a>
                 </div>
             </div>
-
+        </div>
     </section>
     <script async type="text/javascript" src="../js/bulma.js"></script>
 </body>
 
-{% endblock content %}
+<!-- Modal for Adding New Product -->
+<div class="modal" id="exampleModal">
+    <div class="modal-background" id="closeModal"></div>
+    <div class="modal-card">
+    <header class="modal-card-head">
+        <p class="modal-card-title">Add New Product</p>
+        <button class="delete" aria-label="close" id="cancelButton"></button>
+    </header>
+    <section class="modal-card-body">
+        <form id="form">
+            {% csrf_token %}
+            <div class="field">
+                <label for="name" class="label">Name:</label>
+                <div class="control">
+                    <input class="input" type="text" id="name" name="name">
+                </div>
+            </div>
+            <div class="field">
+                <label for="description" class="label">Description:</label>
+                <div class="control">
+                    <textarea class="textarea" id="description" name="description"></textarea>
+                </div>
+            </div>
+            <div class="field">
+                <label for="amount" class="label">Amount:</label>
+                <div class="control">
+                    <input class="input" type="number" id="amount" name="amount">
+                </div>
+            </div>
+        </form>
+    </section>
+    <footer class="modal-card-foot">
+        <button class="button is-success" id="button_add">Add Product</button>
+        <button class="button" aria-label="close" id="cancelButton">Cancel</button>
+    </footer>
+    </div>
+</div>
+
+<script>
+    async function getProducts() {
+        return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+    }
+
+    async function refreshProducts() {
+            const products = await getProducts();
+            let htmlString = ""; // Clear any existing content
+
+            products.forEach((product, index) => { // Use 'product' instead of 'item'
+                // Create a card element for each product
+                htmlString += `
+                    <div class="column is-one-third">
+                        <div class="card">
+                            <div class="card-content">
+                                <p class="title is-5 has-text-black">${product.name}</p>
+                                <p class="subtitle has-text-black">${product.description}</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-footer-item has-text-centered">
+                                    <span class="has-text-black">
+                                        Amount: ${product.amount}
+                                    </span>
+                                </div>
+                                <div class="card-footer-item has-text-centered">
+                                    
+                                    <!-- Increment Button -->
+                                    <button onclick="incrementAmount(${product.pk})" class="button is-small is-success">+</button>
+    
+                                    <!-- Decrement Button -->
+                                    <button onclick="decrementAmount(${product.pk})" class="button is-small is-warning">-</button>
+                                    
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-footer-item">
+                                <a href="${product.edit_url}" class="button is-info is-small">Edit</a>
+                            </div>
+                            <div class="card-footer-item">
+                                <button onclick="deleteProduct(${product.pk})" class="button is-danger is-small is-fullwidth">Delete</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+            });
+        
+// The rest of your functions and code remains the same
+        document.getElementById("product_container").innerHTML = htmlString;
+        }
+
+        async function incrementAmount(id) {
+          const response = await fetch(`/increment-amount/${id}`);
+          refreshProducts();
+        }
+
+        async function decrementAmount(id) {
+          const response = await fetch(`/decrement-amount/${id}`);
+          refreshProducts();
+        }
+
+        async function deleteProduct(id) {
+        const response = await fetch(`/delete-product/${id}`);
+          refreshProducts();
+        }
+
+
+    function addProduct() {
+        fetch("{% url 'main:add_product_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(() => {
+            refreshProducts();
+            document.getElementById("form").reset();
+            document.getElementById("exampleModal").classList.remove("is-active");    
+        });
+
+        return false;
+    }
+
+
+        document.getElementById("button_add").onclick = addProduct;
+        document.getElementById("addProductButton").onclick = function () {
+            // Tampilkan modal saat tombol "Add New Item by AJAX" ditekan.
+            document.getElementById("exampleModal").classList.add("is-active");
+        };
+        
+        // Tampilkan modal saat tombol "Add New Item by AJAX" ditekan.
+        document.getElementById("addProductButton").onclick = function () {
+            document.getElementById("exampleModal").classList.add("is-active");
+        };
+        
+        // Tutup modal saat tombol "Cancel" atau latar belakang modal ditekan.
+        document.getElementById("cancelButton").onclick = function () {
+            document.getElementById("exampleModal").classList.remove("is-active");
+        };
+        document.getElementById("closeModal").onclick = function () {
+            document.getElementById("exampleModal").classList.remove("is-active");
+        };
+
+        // Perbarui item saat halaman dimuat.
+        refreshProducts();
+    </script>
+
+{% endblock %}

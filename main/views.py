@@ -1,10 +1,11 @@
+from django.forms import model_to_dict
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseBadRequest, HttpResponseNotFound, HttpResponseRedirect, JsonResponse
 from main.forms import ProductForm
 from django.urls import reverse
+from main.models import Product
 from django.http import HttpResponse
 from django.core import serializers
-from main.models import Product
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages  
@@ -14,7 +15,10 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib import messages
 from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
 
 
 @login_required(login_url='/login')
@@ -74,9 +78,11 @@ def decrement_amount(request, id):
     return HttpResponseRedirect(reverse('main:show_main'))
 
 def delete_product(request, id):
-    product = get_object_or_404(Product, pk=id)
-    if product.user == request.user:
-        product.delete()
+    # Get data berdasarkan ID
+    product = Product.objects.get(pk = id)
+    # Hapus data
+    product.delete()
+    # Kembali ke halaman awal
     return HttpResponseRedirect(reverse('main:show_main'))
 
 
@@ -138,3 +144,35 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def get_product_json(request):
+    products = Product.objects.filter(user=request.user)
+    product_list = []
+    for product in products:
+        product_dict = {
+            'pk': product.pk,
+            'name': product.name,
+            'description': product.description,
+            'amount': product.amount,
+            'edit_url': reverse('main:edit_product', args=[product.pk]),
+            'delete_url': reverse('main:delete_product', args=[product.pk]),
+        }
+        product_list.append(product_dict)
+    return JsonResponse(product_list, safe=False)
+
+@csrf_exempt
+def add_product_ajax(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.user = request.user
+            product.save()
+            return HttpResponse("Created", status=201)
+        else:
+            # Handle form validation errors and return as JSON
+            errors = form.errors.as_json()
+            return HttpResponseBadRequest(errors, content_type='application/json')
+
+    return HttpResponseNotFound()

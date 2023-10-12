@@ -1159,3 +1159,42 @@ Membedakan warna tabel paling terakhir.
     
 </details>
 
+<details>
+<summary>Tugas 6</summary>
+
+<h1>Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.</h1>
+Asynchronous dan synchronous programming dibedakan dari cara mengeksekusi tugas.
+
+a. Synchronous Programming 
+- Eksekusi secara berurutan. 
+- Satu perintah harus diselesaikan sebelum mengeksekusi perintah berikutnya selesai.
+- Waktu eksekusi lebih lama
+
+b. Asynchronous Programming 
+- Eksekusi tidak secara berurutan.
+- Perintah bisa harus diselesaikan tanpa terikat dengan perintah lain (independen).
+- Waktu eksekusi lebih singkat dan cepat.
+
+<h1>Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.</h1>
+
+Event-driven programming adalah pendekatan dalam pemrograman yang berfokus pada pemrosesan peristiwa atau penanganan event yang terjadi dalam program (seperti input pengguna, tekan keyboard, klik mouse), dan bagaimana program merespon peristiwa-peristiwa tersebut. Sehingga event-driven programming memungkinkan program berinteraksi dengan pengguna secara responsif. Contoh penerapannya: 
+
+Saat pengguna melakukan klik pada tombol "Search" di halaman web. Peristiwa ini akan memicu eksekusi fungsi JavaScript yang bertugas mengirimkan permintaan ke server melalui Fetch API. Kemudian, server akan memberikan respons dalam bentuk data JSON yang mengandung informasi mengenai hasil pencarian yang dilakukan oleh pengguna. Fungsi JavaScript akan mengelola respons ini, dan hasil pencarian akan ditampilkan secara dinamis di halaman web.
+
+<h1>Jelaskan penerapan asynchronous programming pada AJAX.</h1>
+
+AJAX (Asynchronous JavaScript and XML) adalah teknik yang memungkinkan aplikasi web untuk mengirim dan menerima data dari server secara asynchronous atau tidak langsung, tanpa harus memuat ulang seluruh halaman web.
+
+Contoh penerapan asynchronous programming pada AJAX saat user mengisi form registrasi di website, AJAX digunakan untuk mengirim data formulir ke server. Pada proses ini,u ser bisa terus berinteraksi dengan halaman website tanpa menunggu respon server, sehingga lebih responsif.
+
+<h1>Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada library jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.</h1>
+
+Fetch API dan jQuery adalah dua teknologi yang umum digunakan dalam AJAX. 
+
+Fetch API adalah sebuah fitur bawaan dari JavaScript yang sangat berguna dan memiliki keunggulan dalam hal keterbacaan kode. Fetch API mengembalikan respons dalam bentuk Promise sehingga lebih mudah untuk mengelola asynchronous operations. Fetch API memberikan kebebasan mengendalikan konten. Secara keseluruhan, Fetch API lebih ringan dibandingkan dengan jQuery karena hanya fokus pada AJAX dan tidak memiliki banyak fitur lain seperti jQuery.
+
+jQuery adalah sebuah library yang menyederhanakan penggunaan AJAX dibandingkan dengan menggunakan AJAX bawaan dari browser. Salah satu keunggulan jQuery adalah menyediakan metode-metode sederhana seperti .get() dan .post() yang membuat penggunaan AJAX menjadi lebih mudah. Meskipun jQuery masih digunakan, banyak pengembang mulai beralih ke Fetch API karena keterbacaan dan kemampuannya dalam pengembangan web modern.
+
+<h1>Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).</h1>
+
+</details>
