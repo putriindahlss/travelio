@@ -56,7 +56,7 @@
 
                 <div class="has-text-centered"> <!-- Centering the buttons -->
                     <a href="{% url 'main:create_product' %}" class="button is-success has-text-black">Add New Product</a>
-                    <button type="button" class="button is-success has-text-black" id="addProductButton">Add New Item by AJAX</button>                    
+                    <button type="button" class="button is-success has-text-black" id="addProductButton">Add Product by AJAX</button>                    
                     <a href="{% url 'main:logout' %}" class="btn btn-primary">Logout</a>
                 </div>
             </div>
@@ -151,7 +151,6 @@
                 
             });
         
-// The rest of your functions and code remains the same
         document.getElementById("product_container").innerHTML = htmlString;
         }
 

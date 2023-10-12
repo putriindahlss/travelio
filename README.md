@@ -1,6 +1,5 @@
-<h1>Link Adaptable</h1>
-
-https://travelio.adaptable.app/
+<h1>Link App</h1>
+http://putri-indah22-tugas.pbp.cs.ui.ac.id
 Putri Indah Lestari
 2206814412 
 PBP E
@@ -1198,5 +1197,297 @@ Fetch API adalah sebuah fitur bawaan dari JavaScript yang sangat berguna dan mem
 jQuery adalah sebuah library yang menyederhanakan penggunaan AJAX dibandingkan dengan menggunakan AJAX bawaan dari browser. Salah satu keunggulan jQuery adalah menyediakan metode-metode sederhana seperti .get() dan .post() yang membuat penggunaan AJAX menjadi lebih mudah. Meskipun jQuery masih digunakan, banyak pengembang mulai beralih ke Fetch API karena keterbacaan dan kemampuannya dalam pengembangan web modern.
 
 <h1>Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).</h1>
+Langkah 1: Mengubah Kode Table jadi menggunakan Cards
+```html
+<div class="column is-one-third">
+    <div class="card">
+        <div class="card-content">
+            <p class="title is-5 has-text-black">{{ product.name }}</p>
+            <p class="subtitle has-text-black">{{ product.description }}</p>
+        </div>
+        <div class="card-footer">
+            <div class="card-footer-item has-text-centered">
+                <span class="has-text-black">
+                    Amount: {{ product.amount }}
+                </span>
+            </div>
+            <div class="card-footer-item has-text-centered">
+                <a href="{% url 'main:add_amount' product.id %}" class="button is-small is-success">+</a>
+                <a href="{% url 'main:decrement_amount' product.id %}" class="button is-small is-warning">-</a>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="card-footer-item has-text-centered">
+                <a href="{% url 'main:edit_product' product.pk %}" class="button is-small is-info">Edit</a>
+            </div>
+            <div class="card-footer-item has-text-centered">
+                <a href="{% url 'main:delete_product' product.id %}" class="button is-small is-danger">Delete</a>
+            </div> 
+        </div>
+    </div>
+</div> 
+```    
 
+Langkah 2: Ubah Kode Cards Data Item agar Mendukung AJAX GET dan Melakukan Pengambilan Task Menggunakan AJAX GET
+- Hapus kode untuk tampilin cards di main.html dan mengimplementasikan AJAX GET
+```html
+<div class="columns is-multiline" id="product_container"></div>
+```   
+- Implementasi cards di scripts
+```html
+<script>
+    async function getProducts() {
+        return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+    }
+
+    async function refreshProducts() {
+        const products = await getProducts();
+        let htmlString = ""; // Clear any existing content
+        products.forEach((product, index) => { // Use 'product' instead of 'item'
+            // Create a card element for each product
+            htmlString += `
+                <div class="column is-one-third">
+                    <div class="card">
+                        <div class="card-content">
+                            <p class="title is-5 has-text-black">${product.name}</p>
+                            <p class="subtitle has-text-black">${product.description}</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-item has-text-centered">
+                                <span class="has-text-black">
+                                    Amount: ${product.amount}
+                                </span>
+                            </div>
+                            <div class="card-footer-item has-text-centered">
+                                
+                                <!-- Increment Button -->
+                                <button onclick="incrementAmount(${product.pk})" class="button is-small is-success">+</button>
+    
+                                <!-- Decrement Button -->
+                                <button onclick="decrementAmount(${product.pk})" class="button is-small is-warning">-</button>
+                                    
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-item">
+                            <a href="${product.edit_url}" class="button is-info is-small">Edit</a>
+                        </div>
+                        <div class="card-footer-item">
+                            <button onclick="deleteProduct(${product.pk})" class="button is-danger is-small is-fullwidth">Delete</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+            });
+        
+        document.getElementById("product_container").innerHTML = htmlString;
+        }
+
+        async function incrementAmount(id) {
+          const response = await fetch(`/increment-amount/${id}`);
+          refreshProducts();
+        }
+
+        async function decrementAmount(id) {
+          const response = await fetch(`/decrement-amount/${id}`);
+          refreshProducts();
+        }
+
+        async function deleteProduct(id) {
+        const response = await fetch(`/delete-product/${id}`);
+          refreshProducts();
+        }
+
+    function addProduct() {
+        fetch("{% url 'main:add_product_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(() => {
+            refreshProducts();
+            document.getElementById("form").reset();
+            document.getElementById("exampleModal").classList.remove("is-active");    
+        });
+
+        return false;
+    }
+
+        document.getElementById("button_add").onclick = addProduct;
+        document.getElementById("addProductButton").onclick = function () {
+            // Tampilkan modal saat tombol "Add New Item by AJAX" ditekan.
+            document.getElementById("exampleModal").classList.add("is-active");
+        };
+        
+        // Tampilkan modal saat tombol "Add New Item by AJAX" ditekan.
+        document.getElementById("addProductButton").onclick = function () {
+            document.getElementById("exampleModal").classList.add("is-active");
+        };
+        
+        // Tutup modal saat tombol "Cancel" atau latar belakang modal ditekan.
+        document.getElementById("cancelButton").onclick = function () {
+            document.getElementById("exampleModal").classList.remove("is-active");
+        };
+        document.getElementById("closeModal").onclick = function () {
+            document.getElementById("exampleModal").classList.remove("is-active");
+        };
+
+        // Perbarui item saat halaman dimuat.
+        refreshProducts();
+    </script>
+```
+Langkah 3: Buat button yang Membuka Modal Form dan Membuat Modal Form
+- Menambahkan button Add Product by AJAX
+```html
+<div class="has-text-centered"> <!-- Centering the buttons -->
+    <button type="button" class="button is-success has-text-black" id="addProductButton">Add Product by AJAX</button>                    
+</div>
+```
+- Membuat modal dengan form untuk menambahkan item
+```html
+<div class="modal" id="exampleModal">
+    <div class="modal-background" id="closeModal"></div>
+    <div class="modal-card">
+    <header class="modal-card-head">
+        <p class="modal-card-title">Add New Product</p>
+        <button class="delete" aria-label="close" id="cancelButton"></button>
+    </header>
+    <section class="modal-card-body">
+        <form id="form">
+            {% csrf_token %}
+            <div class="field">
+                <label for="name" class="label">Name:</label>
+                <div class="control">
+                    <input class="input" type="text" id="name" name="name">
+                </div>
+            </div>
+            <div class="field">
+                <label for="description" class="label">Description:</label>
+                <div class="control">
+                    <textarea class="textarea" id="description" name="description"></textarea>
+                </div>
+            </div>
+            <div class="field">
+                <label for="amount" class="label">Amount:</label>
+                <div class="control">
+                    <input class="input" type="number" id="amount" name="amount">
+                </div>
+            </div>
+        </form>
+    </section>
+    <footer class="modal-card-foot">
+        <button class="button is-success" id="button_add">Add Product</button>
+        <button class="button" aria-label="close" id="cancelButton">Cancel</button>
+    </footer>
+    </div>
+</div>
+```
+
+- Tambahin fungsi addProduct() supaya product baru muncul saat diklik
+```html
+<script>
+    ...
+    function addProduct() {
+        fetch("{% url 'main:add_product_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshProducts)
+
+        document.getElementById("form").reset()
+        return false
+    }
+    
+    document.getElementById("button_add").onclick = addProduct
+
+</script>
+```
+
+Langkah 4: Tambahkan fungsi Views.py untuk Add New Item
+```python
+@csrf_exempt
+def add_product_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        price = request.POST.get("price")
+        description = request.POST.get("description")
+        amount = request.POST.get("amount")
+        status = request.POST.get("status")
+        user = request.user
+
+        new_product = Product(name=name, price=price, description=description, amount=amount, status=status, user=user)
+        new_product.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
+```
+
+Langkah 5: Hubungkan form ke path dengan menambahkan path di urls.py
+```python
+path('create-product-ajax/', add_product_ajax, name='add_product_ajax'),
+```
+
+Langkah 6: Melakukan refresh halaman secara asinkronus tanpa reload dengan menambahkan fungsi di bawah
+```html
+async function refreshProducts() {
+        const products = await getProducts();
+        let htmlString = ""; // Clear any existing content
+        products.forEach((product, index) => { // Use 'product' instead of 'item'
+            // Create a card element for each product
+            htmlString += `
+                <div class="column is-one-third">
+                    <div class="card">
+                        <div class="card-content">
+                            <p class="title is-5 has-text-black">${product.name}</p>
+                            <p class="subtitle has-text-black">${product.description}</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-item has-text-centered">
+                                <span class="has-text-black">
+                                    Amount: ${product.amount}
+                                </span>
+                            </div>
+                            <div class="card-footer-item has-text-centered">
+                                
+                                <!-- Increment Button -->
+                                <button onclick="incrementAmount(${product.pk})" class="button is-small is-success">+</button>
+    
+                                <!-- Decrement Button -->
+                                <button onclick="decrementAmount(${product.pk})" class="button is-small is-warning">-</button>
+                                    
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-item">
+                            <a href="${product.edit_url}" class="button is-info is-small">Edit</a>
+                        </div>
+                        <div class="card-footer-item">
+                            <button onclick="deleteProduct(${product.pk})" class="button is-danger is-small is-fullwidth">Delete</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+            });
+
+}
+```
+
+Langkah 7: Melakukan perintah collectstatic
+- Push kode ke server penyebaran.
+- Di server, jalankan perintah collectstatic untuk menyalin semua berkas statis ke dalam STATIC_ROOT. dengan cara
+./manage.py collectstatic -v0 --noinput 
+
+<h1>BONUS</h1>
+Implementasi AJAX delete dengan menambah baris kode berikut:
+```html
+async function deleteProduct(id) {
+    const response = await fetch(`/delete-product/${id}`);
+      refreshProducts();
+}
+```
+
+Lalu melakukan deploy ke PaaS PBP Fasilkom UI (sudah berhasil)
+Link: http://putri-indah22-tugas.pbp.cs.ui.ac.id
 </details>
