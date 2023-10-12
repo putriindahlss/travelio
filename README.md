@@ -1,7 +1,11 @@
 <h1>Link App</h1>
+
 http://putri-indah22-tugas.pbp.cs.ui.ac.id
+
 Putri Indah Lestari
+
 2206814412 
+
 PBP E
 
 <details>
@@ -1198,6 +1202,7 @@ jQuery adalah sebuah library yang menyederhanakan penggunaan AJAX dibandingkan d
 
 <h1>Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).</h1>
 Langkah 1: Mengubah Kode Table jadi menggunakan Cards
+
 ```html
 <div class="column is-one-third">
     <div class="card">
@@ -1481,6 +1486,7 @@ Langkah 7: Melakukan perintah collectstatic
 
 <h1>BONUS</h1>
 Implementasi AJAX delete dengan menambah baris kode berikut:
+
 ```html
 async function deleteProduct(id) {
     const response = await fetch(`/delete-product/${id}`);
@@ -1489,5 +1495,6 @@ async function deleteProduct(id) {
 ```
 
 Lalu melakukan deploy ke PaaS PBP Fasilkom UI (sudah berhasil)
+
 Link: http://putri-indah22-tugas.pbp.cs.ui.ac.id
 </details>
